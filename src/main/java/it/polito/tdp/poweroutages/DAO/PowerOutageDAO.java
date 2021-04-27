@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +36,32 @@ public class PowerOutageDAO {
 		return nercList;
 	}
 	
+	
+	public List<ProveOutages> getAllProve(){
+		String sql = "SELECT id, customers_affected, date_event_finished, date_event_began "
+				+ "FROM poweroutages";
+		List<ProveOutages> listaprove = new ArrayList<>();
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			ResultSet res = st.executeQuery();
+
+			while (res.next()) {
+				LocalDateTime datain = res.getTimestamp("date_event_began").toLocalDateTime();
+				LocalDateTime datafin = res.getTimestamp("date_event_finished").toLocalDateTime();
+				
+				ProveOutages po = new ProveOutages(res.getInt("id"), res.getInt("customers_affected"), datain, datafin);
+				
+				listaprove.add(po);
+			}
+
+			conn.close();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return listaprove;
+
+	}
 
 }

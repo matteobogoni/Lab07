@@ -5,6 +5,8 @@
 package it.polito.tdp.poweroutages;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import it.polito.tdp.poweroutages.model.Model;
 import it.polito.tdp.poweroutages.model.Nerc;
@@ -15,7 +17,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class FXMLController {
-
+	
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
 
@@ -39,6 +41,14 @@ public class FXMLController {
     @FXML
     void doRun(ActionEvent event) {
     	txtResult.clear();
+    	String maxye = txtYears.getText();
+    	String maxho = txtHours.getText();
+    	
+    	Integer maxy = Integer.parseInt(maxye);
+    	if(maxy<0 || maxy>14) {
+    		txtResult.setText("Errore di inserimento anni");
+    	}
+    	
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
@@ -54,5 +64,10 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	
+    	List<Nerc> listan = new ArrayList<>(model.getNercList());
+    	
+    	cmbNerc.getItems().addAll(listan);
+    	
     }
 }
