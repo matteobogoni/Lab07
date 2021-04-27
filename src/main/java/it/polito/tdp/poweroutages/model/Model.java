@@ -16,4 +16,8 @@ public class Model {
 		return podao.getNercList();
 	}
 	
+	public List<ProveOutages> trovasequenza (int anni, int durata ){
+		
+		return null;
+	}
 }

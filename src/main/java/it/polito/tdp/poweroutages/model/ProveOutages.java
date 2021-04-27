@@ -1,4 +1,4 @@
-package it.polito.tdp.poweroutages.DAO;
+package it.polito.tdp.poweroutages.model;
 
 
 import java.time.LocalDateTime;

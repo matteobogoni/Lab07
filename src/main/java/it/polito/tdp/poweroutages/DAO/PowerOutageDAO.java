@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.polito.tdp.poweroutages.model.Nerc;
+import it.polito.tdp.poweroutages.model.ProveOutages;
 
 public class PowerOutageDAO {
 	
